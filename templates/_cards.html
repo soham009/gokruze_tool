@@ -1,0 +1,110 @@
+<div class = "d-flex justify-content-around mt-4">
+<table class="table w-25 p-3">
+  <thead class="thead bg-info text-white">
+    <tr>
+      <th>#</th>
+      <th>Total</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Collected</td>
+      <td>{{ total_collect.all }}</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Uncontacted</td>
+      <td>{{ total.Uncontacted }}</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Deciding</td>
+      <td>{{ total.Undecided}}</td>
+    </tr>
+      <tr>
+      <th scope="row">4</th>
+      <td>Converted</td>
+      <td>{{ total.Converted}}</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>Not Converted</td>
+      <td>{{ total.Interested}}</td>
+    </tr>
+  </tbody>
+</table>
+<table class="table w-25 p-3">
+  <thead class="thead bg-info text-white">
+    <tr>
+      <th>#</th>
+      <th>This Week</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Collected</td>
+      <td>{{ total_collect.week }}</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Uncontacted</td>
+      <td>{{ week.Uncontacted }}</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Deciding</td>
+      <td>{{ week.Undecided }}</td>
+    </tr>
+      <tr>
+      <th scope="row">4</th>
+      <td>Converted</td>
+      <td>{{ week.Converted }}</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>Not Converted</td>
+      <td>{{ week.Interested }}</td>
+    </tr>
+  </tbody>
+</table>
+<table class="table w-25 p-3">
+  <thead class="thead bg-info text-white">
+    <tr>
+      <th>#</th>
+      <th>This Month</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Collected</td>
+      <td>{{ total_collect.month }}</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Uncontacted</td>
+      <td>{{ month.Uncontacted }}</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Deciding</td>
+      <td>{{ month.Undecided }}</td>
+    </tr>
+      <tr>
+      <th scope="row">4</th>
+      <td>Converted</td>
+      <td>{{ month.Converted }}</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>Not Converted</td>
+      <td>{{ month.Interested }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

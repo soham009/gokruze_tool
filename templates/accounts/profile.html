@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block stylesheets %}
+<style>
+thead input {
+        width: 100%;
+    }
+</style>
+
+	<!-- Bootstrap CSS CDN -->
+	<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+	<!-- Our Custom CSS -->
+	<link rel="stylesheet" href="{% static 'css/style2.css' %}">
+	<!-- Font awesome CSS -->
+	<link rel="stylesheet" href="{% static 'assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+	<!-- Scrollbar Custom CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.dataTables.min.css">
+
+{% endblock stylesheets %}
+
+{% block content %}
+{% include "_modal.html" %}
+<button type="button" class="btn btn-info btn-lg btn-block" style = "background-color: #3f97bc" onclick="location.href='{% url 'home' %}'" >Sync Leads Data</button>
+<div class="col-12 mb-3 mt-3">
+	{% if leads %}
+	<table id="example" class="display" style="width:100%" >
+		<thead>
+			<tr>
+				<th class="text-center" scope="col">#</th>
+                <th class="text-center" scope="col">Date</th>
+				<th class="text-center" scope="col">Name</th>
+                <th class="text-center" scope="col">Company</th>
+				<th class="text-center" scope="col">City</th>
+				<th class="text-center" scope="col">Contact No</th>
+				<th class="text-center" scope="col">Email</th>
+				<th class="text-center" scope="col">Location From</th>
+				<th class="text-center" scope="col">Location To</th>
+                <th class="text-center" scope="col">Login</th>
+                <th class="text-center" scope="col">LogOut</th>
+				<th class="text-center" scope="col">Read / Update</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for lead in leads %}
+			<tr>
+				<th class="text-center" scope="row">{{ forloop.counter }}</th>
+				<td class="text-center">{{ lead.SubmittedOn }}</td>
+                <td class="text-center">{{ lead.Name }}</td>
+                <td class="text-center">{{ lead.Company }}</td>
+				<td class="text-center">{{ lead.City }}</td>
+                <td class="text-center">{{ lead.ContactNo }}</td>
+                <td class="text-center">{{ lead.Email }}</td>
+				<td class="text-center">{{ lead.LocationFrom }}</td>
+				<td class="text-center">{{ lead.LocationTo }}</td>
+                <td class="text-center">{{ lead.LoginTime }}</td>
+				<td class="text-center">{{ lead.LogoutTime }}</td>
+				<td class="text-center">
+					<button style = "background-color: #3f97bc" type="button" class="read-lead btn btn-sm btn-primary" data-id="{% url 'read_lead' lead.pk %}">
+						<span class="fa fa-eye"></span>
+					</button>
+					<button style = "background-color: #3f97bc" type="button" class="update-lead btn btn-sm btn-primary" data-id="{% url 'update_lead' lead.pk %}">
+						<span class="fa fa-pencil"></span>
+					</button>
+					<!--<button type="button" class="delete-lead btn btn-sm btn-danger" data-toggle="modal" data-target="#modal" data-id="{% url 'delete_lead' lead.pk %}"> <span class="fa fa-trash" aria-label="Delete"></span> </button>-->
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+	<p class="no-leads text-primary">No Leads added yet.</p>
+	{% endif %}
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+      <script src="{% static 'assets/js/jquery-3.2.1.min.js' %}"></script>
+      <script src="{% static 'assets/js/popper.min.js' %}"></script>
+      <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+      <!-- You can alternatively load the minified version -->
+      <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+      <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+      <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+{% endblock scripts %}
+
+{% block extrascripts %}
+<script type="text/javascript">
+    $(function () {
+      // Create lead button
+      $(".create-lead").modalForm({formURL: "{% url 'create_lead' %}"});
+
+      // Update lead buttons
+      $(".update-lead").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      });
+
+      // Read lead buttons
+      $(".read-lead").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      });
+
+      // Delete lead buttons
+      $(".delete-lead").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      })
+
+      // Hide message
+      $(".alert").fadeTo(2000, 500).slideUp(500, function(){
+        $(".alert").slideUp(500);
+      });
+
+    });
+</script>
+
+<script>
+$(document).ready(function() {
+    // Setup - add a text input to each footer cell
+    $('#example thead tr').clone(true).appendTo( '#example thead' );
+    $('#example thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+ 
+        $( 'input', this ).on( 'keyup change', function () {
+            if ( table.column(i).search() !== this.value ) {
+                table
+                    .column(i)
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+ 
+    var table = $('#example').DataTable( {
+        orderCellsTop: true,
+        fixedHeader: true
+    } );
+} );
+</script>
+{% endblock extrascripts %}

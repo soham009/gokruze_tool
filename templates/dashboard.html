@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block stylesheets %}
+	<!-- Bootstrap CSS CDN -->
+	<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+	<!-- Our Custom CSS -->
+	<link rel="stylesheet" href="{% static 'css/style2.css' %}">
+	<!-- Font awesome CSS -->
+	<link rel="stylesheet" href="{% static 'assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+	<!-- Scrollbar Custom CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+{% endblock stylesheets %}
+
+{% block content %}
+<h4>Hello {{user.username|title}} ,</h4>
+{% include "_cards.html" %}
+<div class = "mt-4" id="chartContainer" style="height: 400px; width: 100%;"></div>
+{% endblock %}
+
+{% block scripts %}
+    {% comment %} {% include "_graphs.html" %} {% endcomment %}
+      <script src="{% static 'assets/js/jquery-3.2.1.min.js' %}"></script>
+      <script src="{% static 'assets/js/popper.min.js' %}"></script>
+      <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+{% endblock scripts %}

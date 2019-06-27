@@ -1,0 +1,70 @@
+{% load widget_tweaks %}
+
+<div class="modal-header">
+	<h3 class="modal-title">Lead details</h3>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+
+<div class="modal-body">
+
+	<div class="">
+		Name:
+		{{ leads.Name }}
+	</div>
+	<div class="">
+		Gender:
+		{{ leads.Gender }}
+	</div>
+    <div class="">
+		Company Name:
+		{{ leads.CompanyName }}
+	</div>
+	<div class="">
+		City:
+		{{ leads.City }}
+	</div>
+	<div class="">
+		Contact:
+		{{ leads.ContactNo }}
+	</div>
+	<div class="">
+		Email:
+		{{ leads.EmailId }}
+	</div>
+	<div class="">
+		Location From:
+		{{ leads.LocationFrom }}
+	</div>
+	<div class="">
+		Location To:
+		{{ leads.LocationTo }}
+	</div>
+	<div class="">
+		Login Time:
+		{{ leads.LoginTime }}
+	</div>
+    <div class="">
+		Logout Time:
+		{{ leads.LogoutTime }}
+	</div>
+    <div class="">
+		Monthly Spend on Travel :
+		{{ leads.MonthlySpend }}
+	</div>
+    <div class="">
+		Lead Status:
+		{{ leads.Lead_Status }}
+	</div>
+    <div class="">
+		Progress Remark:
+		{{ leads.Remark }}
+	</div>
+
+
+</div>
+
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
