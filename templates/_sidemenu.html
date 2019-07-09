@@ -82,6 +82,29 @@
 				</li>
 			</ul>
 		</li>
+		<li>
+			<a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reports by City</a>
+			<ul class="collapse list-unstyled" id="reportSubmenu" style = "background-color: #3f97bc" >
+				<li>
+					<a href="{% url 'city_routes_list' city='Kochi'%}">Kochi</a>
+				</li>
+				<li>
+					<a href="{% url 'city_routes_list' city='Mumbai'%}">Mumbai</a>
+				</li>
+				<li>
+					<a href="{% url 'city_routes_list' city='Pune'%}">Pune</a>
+				</li>
+				<li>
+					<a href="{% url 'city_routes_list' city='Banglore'%}">Banglore</a>
+				</li>
+				<li>
+					<a href="{% url 'city_routes_list' city='Hyderabad'%}">Hyderabad</a>
+				</li>
+				<li>
+					<a href="{% url 'city_routes_list' city='Calcutta'%}">Calcutta</a>
+				</li>
+			</ul>
+		</li>
 		{% comment %} <li>
 			<a href="{% url 'leads' %}">My Profile</a>
 		</li> {% endcomment %}

@@ -25,6 +25,7 @@ class Leads(models.Model):
     SubmittedOn	=	models.CharField(max_length=264,blank=True)
     Lead_Status = models.CharField(choices=LEAD_STATUS,max_length=264,default="Uncontacted")
     Remark = models.TextField(blank=True)
+    LocationFromOther = models.CharField(max_length=264,blank=True)
 
     def __str__(self):
         return self.Name

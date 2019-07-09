@@ -25,13 +25,12 @@ thead input {
 
 {% block content %}
 {% include "_modal.html" %}
-<div class="col-12 mb-3 mt-3">
+<div class="col-8 mb-3 mt-3">
 	{% if leads %}
 	<table id="example" class="display" style="width:100%" >
 		<thead>
 			<tr>
 				<th class="text-center" scope="col">#</th>
-                <th class="text-center" scope="col">Date</th>
 				<th class="text-center" scope="col">Name</th>
                 <th class="text-center" scope="col">Company</th>
 				<th class="text-center" scope="col">City</th>
@@ -49,7 +48,6 @@ thead input {
 			{% for lead in leads %}
 			<tr>
 				<th class="text-center" scope="row">{{ forloop.counter }}</th>
-				<td class="text-center">{{ lead.SubmittedOn }}</td>
                 <td class="text-center">{{ lead.Name }}</td>
                 <td class="text-center">{{ lead.CompanyName }}</td>
 				<td class="text-center">{{ lead.City }}</td>
@@ -88,7 +86,7 @@ thead input {
       <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
       <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
       <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
-    <script type="text/javascript" src="dataTables.scrollingPagination.js"></script>
+      <script type="text/javascript" src="dataTables.scrollingPagination.js"></script>
 {% endblock scripts %}
 
 {% block extrascripts %}
@@ -142,6 +140,17 @@ $(document).ready(function() {
         orderCellsTop: true,
         fixedHeader: true,
         "lengthMenu": [ [100, 200, 500, -1], [100, 200, 500, "All"] ],
+        buttons: [
+        {
+            extend: 'excel',
+            text: 'Save current page',
+            exportOptions: {
+                modifier: {
+                    page: 'current'
+                }
+            }
+        }
+    ]
     } );
 } );
 </script>
