@@ -82,7 +82,8 @@
 				</li>
 			</ul>
 		</li>
-		<li>
+		{% if user_role == 13 %}
+{% comment %} 		<li>
 			<a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reports by City</a>
 			<ul class="collapse list-unstyled" id="reportSubmenu" style = "background-color: #3f97bc" >
 				<li>
@@ -104,10 +105,17 @@
 					<a href="{% url 'city_routes_list' city='Calcutta'%}">Calcutta</a>
 				</li>
 			</ul>
-		</li>
-		{% comment %} <li>
-			<a href="{% url 'leads' %}">My Profile</a>
 		</li> {% endcomment %}
+		<li>
+			<a href="{% url 'reports' %}">Reports</a>
+		</li>
+		<li>
+			<a href="{% url 'users' %}">Users</a>
+		</li>
+		{% endif %}
+		<li>
+			<a href="{% url 'profile' %}">My Profile</a>
+		</li>
 	</ul>
 
 	<ul class="list-unstyled CTAs">

@@ -5,17 +5,6 @@
 thead input {
         width: 100%;
     }
-.interested {
-    color: blue;
-    }
-
-.uncontacted {
-    color:red;
-    }
-
-.converted {
-    color: green;
-    }
 </style>
 
 	<!-- Bootstrap CSS CDN -->
@@ -36,55 +25,45 @@ thead input {
 {% block content %}
 {% include "_modal.html" %}
 <div class="col-8 mb-3 mt-3">
-	{% if leads %}
-	<table id="example" class="display" style="zoom:80%" >
+	{% if users %}
+	<table id="example" class="display" style="width:100%" >
 		<thead>
 			<tr>
 				<th class="text-center" scope="col">#</th>
-				<th class="text-center" scope="col">Name</th>
-                <th class="text-center" scope="col">Company</th>
-				<th class="text-center" scope="col">City</th>
-				<th class="text-center" scope="col">Contact No</th>
-				<th class="text-center" scope="col">Email</th>
-				<th class="text-center" scope="col">Location From</th>
-				<th class="text-center" scope="col">Location To</th>
-                <th class="text-center" scope="col">Log in</th>
-                <th class="text-center" scope="col">Log Out</th>
-                <th class="text-center" scope="col">Lead Status</th>
-				<th class="text-center" scope="col">Read / Update</th>
+				<th class="text-center" scope="col">User Name</th>
+                <th class="text-center" scope="col">Role</th>
+				<th class="text-center" scope="col">Last Login</th>
+				{% comment %} <th class="text-center" scope="col">Read / Update</th> {% endcomment %}
 			</tr>
 		</thead>
 		<tbody>
-			{% for lead in leads %}
+			{% for user in users %}
 			<tr>
 				<th class="text-center" scope="row">{{ forloop.counter }}</th>
-                <td class="text-center">{{ lead.Name }}</td>
-                <td class="text-center">{{ lead.CompanyName }}</td>
-				<td class="text-center">{{ lead.City }}</td>
-                <td class="text-center">{{ lead.ContactNo }}</td>
-                <td class="text-center">{{ lead.EmailId }}</td>
-				<td class="text-center">{{ lead.LocationFrom }}</td>
-				<td class="text-center">{{ lead.LocationTo }}</td>
-                <td class="text-center">{{ lead.LoginTime }}</td>
-				<td class="text-center">{{ lead.LogoutTime }}</td>
-                <td class="text-center">{{ lead.Lead_Status }}</td>
-				<td class="text-center">
+                <td class="text-center">{{ user.username }}</td>
+                <td class="text-center">
+                {% if user.role == 13 %}
+                Super Admin
+                {% else %}
+                Admin
+                {% endif %}
+                </td>
+				<td class="text-center">{{ user.last_login }}</td>
+				{% comment %} <td class="text-center">
 					<button style = "background-color: #3f97bc" type="button" class="read-lead btn btn-sm btn-primary" data-id="{% url 'read_lead' lead.pk %}">
 						<span class="fa fa-eye"></span>
 					</button>
 					<button style = "background-color: #3f97bc" type="button" class="update-lead btn btn-sm btn-primary" data-id="{% url 'update_lead' lead.pk %}">
 						<span class="fa fa-pencil"></span>
 					</button>
-                    {% if user_role == 13 %}
-					<button type="button" class="delete-lead btn btn-sm btn-danger" data-toggle="modal" data-target="#modal" data-id="{% url 'delete_lead' lead.pk %}"> <span class="fa fa-trash" aria-label="Delete"></span> </button>
-                    {% endif %}
-				</td>
+					<!--<button type="button" class="delete-lead btn btn-sm btn-danger" data-toggle="modal" data-target="#modal" data-id="{% url 'delete_lead' lead.pk %}"> <span class="fa fa-trash" aria-label="Delete"></span> </button>-->
+				</td> {% endcomment %}
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 	{% else %}
-	<p class="no-leads text-primary">No Leads added yet.</p>
+	<p class="no-leads text-primary">No Users added yet.</p>
 	{% endif %}
 </div>
 
@@ -136,7 +115,7 @@ $(document).ready(function() {
     $('#example thead tr').clone(true).appendTo( '#example thead' );
     $('#example thead tr:eq(1) th').each( function (i) {
         var title = $(this).text();
-        $(this).html( '<input type="text"  />' );
+        $(this).html( '<input type="text" placeholder="Search" />' );
  
         $( 'input', this ).on( 'keyup change', function () {
             if ( table.column(i).search() !== this.value ) {
@@ -152,22 +131,17 @@ $(document).ready(function() {
         orderCellsTop: true,
         fixedHeader: true,
         "lengthMenu": [ [100, 200, 500, -1], [100, 200, 500, "All"] ],
-        "createdRow": function( row, data, dataIndex ) {
-            if ( data[10] == "Converted" ) {
-        $(row).addClass('converted');
-
-      }
-       if ( data[10] == "Interested" ) {
-        $(row).addClass('interested');
-
-      }
-       if ( data[10] == "Uncontacted" ) {
-        $(row).addClass('uncontacted');
-
-      }
-
-
-   }
+        buttons: [
+        {
+            extend: 'excel',
+            text: 'Save current page',
+            exportOptions: {
+                modifier: {
+                    page: 'current'
+                }
+            }
+        }
+    ]
     } );
 } );
 </script>

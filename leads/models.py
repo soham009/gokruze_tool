@@ -1,5 +1,7 @@
 from django.db import models
-# Create your models here.
+from django.contrib.auth.models import AbstractUser
+from datetime import datetime
+from django.utils import timezone
 
 class Leads(models.Model):
     LEAD_STATUS = (('Interested','Interested'),
@@ -26,6 +28,8 @@ class Leads(models.Model):
     Lead_Status = models.CharField(choices=LEAD_STATUS,max_length=264,default="Uncontacted")
     Remark = models.TextField(blank=True)
     LocationFromOther = models.CharField(max_length=264,blank=True)
+    SubmittedOnDate	=	models.DateTimeField(default=timezone.now)
+    valid = models.BooleanField(default=False)
 
     def __str__(self):
         return self.Name
@@ -34,6 +38,17 @@ class Leads(models.Model):
         verbose_name_plural = "Leads Collected"
         verbose_name = "Lead"
 
+# Create your models here.
+class CustomUser(AbstractUser):
+    '''Overrides the custom django user model'''
 
-
-
+    # Datafields
+    NORMAL_USER = 1
+    RESTAURANT_1_ADMIN = 2
+    SUPER_ADMIN = 13
+    ROLE_CHOICES = (
+      (NORMAL_USER,'normal_user'),
+      (RESTAURANT_1_ADMIN,'admin'),
+      (SUPER_ADMIN,'super_admin'),
+    )
+    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES,default=NORMAL_USER)

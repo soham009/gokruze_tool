@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'leads.apps.LeadsConfig',
     'django.contrib.staticfiles',
-    'leads',
     'bootstrap_modal_forms',
     'widget_tweaks',
 ]
@@ -130,3 +130,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/accounts/login'
+
+AUTH_USER_MODEL = 'leads.CustomUser'

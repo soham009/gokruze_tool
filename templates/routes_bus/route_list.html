@@ -30,7 +30,11 @@
 			{% for key,value in routes_dict.items %}
 			<tr>
 				<th class="text-center" scope="row">{{ forloop.counter }}</th>
+				{% ifnotequal key.0 "Other" %}
 				<td class="text-center">{{ key.0 }} to {{ key.1 }}</td>
+				{% else %}
+				<td class="text-center">{{ key.2 }} to {{ key.1 }}</td>
+				{% endifnotequal %}
                 <td class="text-center"><a href="{% url 'user_routes_details' location_from=key.0 location_to=key.1 lead_status="Uncontacted" %}">{{value.0}}</a></td>
                 <td class="text-center"><a href="{% url 'user_routes_details' location_from=key.0 location_to=key.1 lead_status="Undecided" %}">{{value.1}}</a></td>
 				<td class="text-center"><a href="{% url 'user_routes_details' location_from=key.0 location_to=key.1 lead_status="Converted" %}">{{value.2}}</a></td>

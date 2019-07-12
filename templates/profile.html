@@ -13,13 +13,29 @@
 {% endblock stylesheets %}
 
 {% block content %}
-<h4>Hello {{user.username|title}} ,</h4>
-{% include "_cards.html" %}
-<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<div class="card text-center">
+  <div class="card-header">
+    My Details
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Username : {{username}}</h5>
+	<h5 class="card-title">Role :
+	{% if user_role == 13 %}
+	Super Admin
+	{% else %}
+	Admin
+	{% endif %}
+	</h5>
+    <a href="#" class="btn btn-danger">Request Password Change</a>
+  </div>
+  <div class="card-footer text-muted">
+    Last Login : {{login}} <br> Date Joined : {{date_join}}
+  </div>
+</div>
+
 {% endblock %}
 
 {% block scripts %}
-	  {% include "_graphs.html" %}
       <script src="{% static 'assets/js/jquery-3.2.1.min.js' %}"></script>
       <script src="{% static 'assets/js/popper.min.js' %}"></script>
       <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>

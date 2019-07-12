@@ -5,6 +5,17 @@
 thead input {
         width: 100%;
     }
+.interested {
+    color: blue;
+    }
+
+.uncontacted {
+    color:red;
+    }
+
+.converted {
+    color: green;
+    }
 </style>
 
 	<!-- Bootstrap CSS CDN -->
@@ -27,7 +38,7 @@ thead input {
 {% include "_modal.html" %}
 <div class="col-12 mb-3 mt-3">
 	{% if leads %}
-	<table id="example" class="display" style="width:100%" >
+	<table id="example" class="display" style="zoom:80%" >
 		<thead>
 			<tr>
 				<th class="text-center" scope="col">#</th>
@@ -39,6 +50,7 @@ thead input {
 				<th class="text-center" scope="col">Email</th>
                 <th class="text-center" scope="col">Log in</th>
                 <th class="text-center" scope="col">Log Out</th>
+                <th class="text-center" scope="col">Lead Status</th>
                 <th class="text-center" scope="col">Read / Update</th>
 			</tr>
 		</thead>
@@ -54,6 +66,7 @@ thead input {
                 <td class="text-center">{{ lead.EmailId }}</td>
                 <td class="text-center">{{ lead.LoginTime }}</td>
 				<td class="text-center">{{ lead.LogoutTime }}</td>
+                <td class="text-center">{{ lead.Lead_Status }}</td>
                 <td class="text-center">
 					<button style = "background-color: #3f97bc" type="button" class="read-lead btn btn-sm btn-primary" data-id="{% url 'read_lead' lead.pk %}">
 						<span class="fa fa-eye"></span>
@@ -134,7 +147,23 @@ $(document).ready(function() {
     var table = $('#example').DataTable( {
         orderCellsTop: true,
         fixedHeader: true,
-        "lengthMenu": [ [100, 200, 500, -1], [100, 200, 500, "All"] ]
+        "lengthMenu": [ [100, 200, 500, -1], [100, 200, 500, "All"] ],
+        "createdRow": function( row, data, dataIndex ) {
+            if ( data[9] == "Converted" ) {
+        $(row).addClass('converted');
+
+      }
+       if ( data[9] == "Interested" ) {
+        $(row).addClass('interested');
+
+      }
+       if ( data[9] == "Uncontacted" ) {
+        $(row).addClass('uncontacted');
+
+      }
+
+
+   }
     } );
 } );
 </script>

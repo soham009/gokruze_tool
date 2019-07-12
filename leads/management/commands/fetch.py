@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from leads.models import Leads
-import datetime
 from datetime import date
+import datetime
 import requests
 
 class Command(BaseCommand):
@@ -17,6 +17,6 @@ class Command(BaseCommand):
             response = req.json()
             if(response['msg']=='Record Found'):
                 for title in response['data']:
-                    Leads.objects.create(City=title['City'], Name=title['Name'], Gender=title['Gender'], EmailId=title['EmailId'], ContactNo=title['ContactNo'],LocationFrom=title['LocationFrom'],LocationTo=title['LocationTo'], LoginTime=title['LoginTime'],LogoutTime=title['LogoutTime'],CompanyName=title['CompanyName'],TravalToWork=title['TravalToWork'], MonthlySpend=title['MonthlySpend'],HearAboutUs=title['HearAboutUs'],SubmittedOn=title['SubmittedOn'],LocationFromOther=title['LocationFromOther'])
+                    Leads.objects.create(City=title['City'], Name=title['Name'], Gender=title['Gender'], EmailId=title['EmailId'], ContactNo=title['ContactNo'],LocationFrom=title['LocationFrom'],LocationTo=title['LocationTo'], LoginTime=title['LoginTime'],LogoutTime=title['LogoutTime'],CompanyName=title['CompanyName'],TravalToWork=title['TravalToWork'], MonthlySpend=title['MonthlySpend'],HearAboutUs=title['HearAboutUs'],SubmittedOnDate=datetime.datetime.strptime(title['SubmittedOn'] , '%d-%b-%Y %I:%M %p'),LocationFromOther=title['LocationFromOther'], SubmittedOn=title['SubmittedOn'] )
             n = n+1
         self.stdout.write(self.style.SUCCESS('Successfully Fetched Data'))
