@@ -12,7 +12,7 @@ class Command(BaseCommand):
         while(n!=2):
             yesterday = datetime.date.today()-datetime.timedelta(days=n)
             qs = Leads.objects.all()
-            url = 'https://www.gokruze.com/other/survey_records/kz_usr/123456/' + str(yesterday.strftime('%Y.%m.%d')).replace('.','')
+            url = '#' + str(yesterday.strftime('%Y.%m.%d')).replace('.','')
             req = requests.get(url)
             response = req.json()
             if(response['msg']=='Record Found'):
