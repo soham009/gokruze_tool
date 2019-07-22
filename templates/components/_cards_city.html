@@ -1,0 +1,68 @@
+<div class = "d-flex justify-content-around mt-4">
+<table class="table">
+  <thead class="thead bg-info text-white">
+    <tr>
+      <th>#</th>
+      <th>Lead Status</th>
+      <th>Mumbai</th>
+      <th>Kochi</th>
+      <th>Pune</th>
+      <th>Banglore</th>
+      <th>Hyderabad</th>
+      <th>Calcutta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Collected</td>
+      <td>{{ total_city_collect.mumbai_all }}</td>
+      <td>{{ total_city_collect.kochi_all }}</td>
+      <td>{{ total_city_collect.pune_all }}</td>
+      <td>{{ total_city_collect.hyderabad_all }}</td>
+      <td>{{ total_city_collect.banglore_all }}</td>
+      <td>{{ total_city_collect.calcutta_all }}</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Uncontacted</td>
+      <td>{{ mumbai.Uncontacted }}</td>
+      <td>{{ kochi.Uncontacted }}</td>
+      <td>{{ pune.Uncontacted }}</td>
+      <td>{{ banglore.Uncontacted }}</td>
+      <td>{{ hyderabad.Uncontacted }}</td>
+      <td>{{ calcutta.Uncontacted }}</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Deciding</td>
+      <td>{{ mumbai.Undecided }}</td>
+      <td>{{ kochi.Undecided }}</td>
+      <td>{{ pune.Undecided }}</td>
+      <td>{{ banglore.Undecided }}</td>
+      <td>{{ hyderabad.Undecided }}</td>
+      <td>{{ calcutta.Undecided }}</td>
+    </tr>
+      <tr>
+      <th scope="row">4</th>
+      <td>Converted</td>
+      <td>{{ mumbai.Converted }}</td>
+      <td>{{ kochi.Converted }}</td>
+      <td>{{ pune.Converted }}</td>
+      <td>{{ banglore.Converted }}</td>
+      <td>{{ hyderabad.Converted }}</td>
+      <td>{{ calcutta.Converted }}</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>Not Converted</td>
+      <td>{{ mumbai.Interested }}</td>
+      <td>{{ kochi.Interested }}</td>
+      <td>{{ pune.Interested }}</td>
+      <td>{{ banglore.Interested }}</td>
+      <td>{{ hyderabad.Interested }}</td>
+      <td>{{ calcutta.Interested }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

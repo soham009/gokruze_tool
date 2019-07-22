@@ -9,5 +9,5 @@ class LeadForm(BSModalForm):
     class Meta:
         model = Leads
         exclude = ['Created_at']
-        fields = ['Lead_Status','Remark']
+        fields = ['Lead_Status','Remark','is_valid',]
 

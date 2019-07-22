@@ -1,7 +1,11 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 from leads.models import Leads, CustomUser
 from django.contrib.auth.models import Group
 
-admin.site.register(Leads)
+class LeadsAdmin(ImportExportModelAdmin):
+    class Meta:
+        model = Leads
+
+admin.site.register(Leads, LeadsAdmin)
 admin.site.register(CustomUser)
-# Register your models here.

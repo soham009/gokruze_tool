@@ -9,7 +9,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         n=1
-        while(n!=42):
+        while(n!=7):
             yesterday = datetime.date.today()-datetime.timedelta(days=n)
             qs = Leads.objects.all()
             url = 'https://www.gokruze.com/other/survey_records/kz_usr/123456/' + str(yesterday.strftime('%Y.%m.%d')).replace('.','')

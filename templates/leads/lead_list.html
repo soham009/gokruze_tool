@@ -16,6 +16,10 @@ thead input {
 .converted {
     color: green;
     }
+    
+div.dataTables_length {
+    margin-right: 1em;
+    }
 </style>
 
 	<!-- Bootstrap CSS CDN -->
@@ -34,10 +38,16 @@ thead input {
 {% endblock stylesheets %}
 
 {% block content %}
-{% include "_modal.html" %}
+{% include "components/_modal.html" %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Dashboard</a></li>
+    <li class="breadcrumb-item active">All Leads</li>
+  </ol>
+</nav>
 <div class="col-8 mb-3 mt-3">
 	{% if leads %}
-	<table id="example" class="display" style="zoom:80%" >
+	<table id="example" class="display" style="zoom:75%" >
 		<thead>
 			<tr>
 				<th class="text-center" scope="col">#</th>
@@ -57,7 +67,11 @@ thead input {
 		<tbody>
 			{% for lead in leads %}
 			<tr>
-				<th class="text-center" scope="row">{{ forloop.counter }}</th>
+				<th class="text-center" scope="row">
+                {% if lead.is_valid == True %}
+                    <img src="{% static 'img/checked.png' %}" alt="" style='width: 22px; height: 22px;'>
+                {% endif %}
+                {{ forloop.counter }}</th>
                 <td class="text-center">{{ lead.Name }}</td>
                 <td class="text-center">{{ lead.CompanyName }}</td>
 				<td class="text-center">{{ lead.City }}</td>
@@ -99,6 +113,12 @@ thead input {
       <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
       <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
       <script type="text/javascript" src="dataTables.scrollingPagination.js"></script>
+
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
 {% endblock scripts %}
 
 {% block extrascripts %}
@@ -150,10 +170,10 @@ $(document).ready(function() {
  
     var table = $('#example').DataTable( {
         orderCellsTop: true,
-        fixedHeader: true,
+        fixedHeader: false,
         "lengthMenu": [ [100, 200, 500, -1], [100, 200, 500, "All"] ],
         "createdRow": function( row, data, dataIndex ) {
-            if ( data[10] == "Converted" ) {
+        if ( data[10] == "Converted" ) {
         $(row).addClass('converted');
 
       }
@@ -167,7 +187,13 @@ $(document).ready(function() {
       }
 
 
-   }
+   },
+   {% if user_role == 13 %}
+   dom: 'lBfrtip',
+        buttons: [
+         'excel',
+        ],
+    {% endif %}
     } );
 } );
 </script>

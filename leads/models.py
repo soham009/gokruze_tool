@@ -29,7 +29,8 @@ class Leads(models.Model):
     Remark = models.TextField(blank=True)
     LocationFromOther = models.CharField(max_length=264,blank=True)
     SubmittedOnDate	=	models.DateTimeField(default=timezone.now)
-    valid = models.BooleanField(default=False)
+    is_valid = models.BooleanField(default=False)
+    password_change_request = models.BooleanField(default=False)
 
     def __str__(self):
         return self.Name
@@ -41,7 +42,6 @@ class Leads(models.Model):
 # Create your models here.
 class CustomUser(AbstractUser):
     '''Overrides the custom django user model'''
-
     # Datafields
     NORMAL_USER = 1
     RESTAURANT_1_ADMIN = 2
@@ -52,3 +52,4 @@ class CustomUser(AbstractUser):
       (SUPER_ADMIN,'super_admin'),
     )
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES,default=NORMAL_USER)
+    name = models.CharField(max_length=264, blank='True')

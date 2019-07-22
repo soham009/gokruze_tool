@@ -1,0 +1,50 @@
+<div class = "d-flex justify-content-around mt-4">
+<table class="table">
+  <thead class="thead bg-info text-white">
+    <tr>
+      <th>#</th>
+      <th>Lead Status</th>
+      <th>Total Count</th>
+      <th>Count This Week</th>
+      <th>Count This Month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Collected</td>
+      <td><a href="{% url 'leads' %}">{{ total_collect.all }}</a></td>
+      <td><a href="{% url 'dashboard_week' %}">{{ total_collect.week }}</a></td>
+      <td><a href="{% url 'dashboard_month' %}">{{ total_collect.month }}</a></td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Uncontacted</td>
+      <td><a href="{% url 'dashboard_status' lead_status="Uncontacted" %}">{{ total.Uncontacted }}</a></td>
+      <td><a href="{% url 'week' lead_status="Uncontacted" %}">{{ week.Uncontacted }}</a></td>
+      <td><a href="{% url 'month' lead_status="Uncontacted" %}">{{ month.Uncontacted }}</a></td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Deciding</td>
+      <td><a href="{% url 'dashboard_status' lead_status="Undecided" %}">{{ total.Undecided }}</a></td>
+      <td><a href="{% url 'week' lead_status="Undecided" %}">{{ week.Undecided }}</a></td>
+      <td><a href="{% url 'month' lead_status="Undecided" %}">{{ month.Undecided }}</a></td>
+    </tr>
+      <tr>
+      <th scope="row">4</th>
+      <td>Converted</td>
+      <td><a href="{% url 'dashboard_status' lead_status="Converted" %}">{{ total.Converted }}</a></td>
+      <td><a href="{% url 'week' lead_status="Converted" %}">{{ week.Converted }}</a></td>
+      <td><a href="{% url 'month' lead_status="Converted" %}">{{ month.Converted }}</a></td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>Not Converted</td>
+      <td><a href="{% url 'dashboard_status' lead_status="Interested" %}">{{ total.Interested }}</a></td>
+      <td><a href="{% url 'week' lead_status="Interested" %}">{{ week.Interested }}</a></td>
+      <td><a href="{% url 'month' lead_status="Interested" %}">{{ month.Interested }}</a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
